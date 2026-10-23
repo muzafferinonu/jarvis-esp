@@ -1,0 +1,6 @@
+proje=priz
+kart=c3
+surum=1792786227
+boyut=1244032
+sha256=398dc4790bd4fe4f3137ec945ce6b0b713fa19d174998139eeec1c7e857b0dff
+imza=MEUCIQCTJsNafoCy9cYCFdPE+xWypEOFpjtTm3i7APknWwfA2QIgUZpJDrIvBeN6OWQoV6LI+tUYR7AXUp+736ifXJ/a75o=

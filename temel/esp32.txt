@@ -1,0 +1,6 @@
+proje=temel
+kart=esp32
+surum=1792786227
+boyut=1128752
+sha256=f67fac3a4991f174e78e631d3cf7f295120d0356e6d36e037b2c57384cbb4259
+imza=MEUCIQDYVRfCcfFue5TLPJDOlrjjS6e1EzNBACE/6w9sv5cPnwIgfQ6i953ii28On+j5+obk9jgljTepj0t3yIDMMGmZuFw=

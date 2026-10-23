@@ -1,0 +1,6 @@
+proje=temel
+kart=c3
+surum=1792786227
+boyut=1218944
+sha256=034e27394c2ecbea7fbda3033b0b1b5b72af287c8d49c80192889c5ceef0add2
+imza=MEUCIQDe3uL0b0Dq31PGoUELWV5JOpphpHroqbtq16vlPWp8UwIgYhGWr5xBrpsFW2r+ibQEYyXG5GBUPQY4FjaLw0gUb2g=
