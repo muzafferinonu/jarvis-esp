@@ -67,10 +67,17 @@ static void gozCiz() {
 static void ekranBaslat() {
   if (jarvis::ayarSayi("oled") != 1) return;
   Wire.begin(jarvis::ayarSayi("sda"), jarvis::ayarSayi("scl"));
-  Wire.beginTransmission(0x3C);
-  if (Wire.endTransmission() != 0) { jarvis::yaz("OLED bulunamadı (SDA/SCL pinlerini ve 3V3/GND'yi kontrol edin)"); return; }
+  String bulunan;
+  uint8_t adr = 0;
+  for (uint8_t a = 1; a < 127; a++) {  // I2C taraması: hangi adreste ne var (son olaylarda yazar)
+    Wire.beginTransmission(a);
+    if (Wire.endTransmission() == 0) { bulunan += " 0x" + String(a, HEX); if (a == 0x3C || a == 0x3D) adr = a; }
+  }
+  jarvis::yaz("I2C taraması (SDA " + jarvis::ayarOku("sda") + ", SCL " + jarvis::ayarOku("scl") + "):" + (bulunan.length() ? bulunan : String(" hiçbir şey yok")));
+  if (!adr) { jarvis::yaz("OLED bulunamadı: SDA/SCK kablolarını yer değiştirip deneyin, VCC 3V3'te mi bakın"); return; }
   if (jarvis::ayarOku("oled_tur") == "sh1106") ekran = new U8G2_SH1106_128X64_NONAME_F_HW_I2C(U8G2_R0, U8X8_PIN_NONE);
   else ekran = new U8G2_SSD1306_128X64_NONAME_F_HW_I2C(U8G2_R0, U8X8_PIN_NONE);
+  ekran->setI2CAddress(adr * 2);
   ekran->begin();
   ekran->setContrast(200);
   jarvis::yaz("OLED açıldı, gözler çalışıyor");
