@@ -1,0 +1,5 @@
+gizli/
+build/
+*.pem
+!lib/**/*.pem
+__pycache__/

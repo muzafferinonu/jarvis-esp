@@ -1,0 +1,4 @@
+{
+  "_aciklama": "Hangi cihaza hangi proje. Anahtar: cihazın kimliği (cihaz sayfasında yazar, ör. jA1B2C3). Proje: projeler/ klasöründeki ad. Listede olmayan cihaz kendi projesinde kalır (ilk yüklemede 'temel'). Bir cihazın projesini değiştirmek için sadece buradaki adı değiştirin; eski projeler silinmez, istediğiniz zaman başka cihaza atanabilir.",
+  "cihazlar": {}
+}

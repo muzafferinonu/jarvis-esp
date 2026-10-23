@@ -1,0 +1,4 @@
+{
+  "c3": {"fqbn": "esp32:esp32:esp32c3:CDCOnBoot=cdc,PartitionScheme=min_spiffs", "ad": "ESP32-C3 Super Mini"},
+  "esp32": {"fqbn": "esp32:esp32:esp32:PartitionScheme=min_spiffs", "ad": "ESP32 (DevKit V1 / NodeMCU-32S)"}
+}

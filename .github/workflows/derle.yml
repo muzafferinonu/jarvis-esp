@@ -1,0 +1,47 @@
+# Her değişiklikte projeleri derler, imzalar ve "yayin" dalına koyar. Cihazlar birkaç dakika içinde oradan kendi projelerinin yeni sürümünü alır.
+name: derle-yayinla
+on:
+  push:
+    branches: [main]
+    paths: ["projeler/**", "lib/**", "cihazlar.json", "kartlar.json", "araclar/**", ".github/workflows/**"]
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: derle
+  cancel-in-progress: false
+jobs:
+  derle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/setup-arduino-cli@v2
+      - name: ESP32 çekirdeği (önbellekli)
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.arduino15
+            ~/Arduino/libraries
+          key: esp32-3.3.12-v1
+      - name: Çekirdek ve kütüphaneler
+        run: |
+          arduino-cli config init --overwrite
+          arduino-cli config add board_manager.additional_urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core update-index
+          arduino-cli core install esp32:esp32@3.3.12
+          arduino-cli lib install ESP32Servo
+      - name: Derle ve imzala
+        env:
+          OTA_IMZA: ${{ secrets.OTA_IMZA }}
+        run: |
+          pip install cryptography
+          python araclar/derle.py --cikti yayin
+      - name: yayin dalına koy
+        run: |
+          cd yayin
+          git init -q -b yayin
+          git config user.name "jarvis-derleyici"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -q -m "yayin: ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" yayin
