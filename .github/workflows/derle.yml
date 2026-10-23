@@ -35,7 +35,7 @@ jobs:
           OTA_IMZA: ${{ secrets.OTA_IMZA }}
         run: |
           pip install cryptography
-          python araclar/derle.py --cikti yayin
+          python araclar/derle.py --hepsi --cikti yayin
       - name: yayin dalına koy
         run: |
           cd yayin
